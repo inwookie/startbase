@@ -12,7 +12,7 @@ def main(args):
     db_name = args.get('db_name')
     collection_name = args.get('collection_name')
 
-    # =====Naver News 정보 가져오기=====
+    # =====Global News 정보 가져오기=====
     docs = global_news()
 
     # ====News 를 DB 에 저장====
