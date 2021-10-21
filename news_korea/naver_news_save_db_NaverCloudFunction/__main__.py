@@ -140,8 +140,7 @@ def scrape_image_url(url):
     :return: og:image 링크
     :rtype: str
     """
-    # 기본 이미지 url  설정 / ref : https://unsplash.com/photos/tAcoHIvCtwM
-    image_url = 'https://images.unsplash.com/photo-1588492069485-d05b56b2831d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80'
+    image_url = 'https://image.freepik.com/free-vector/startup-construction-development-3d-thin-line-art-style-design-concept-isometric-illustration_1284-61110.jpg'
 
     # ==========1. GET Request==========
     # Request 설정값(HTTP Msg) - Desktop Chrome 인 것처럼
