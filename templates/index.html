@@ -64,10 +64,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#about">News</a>
+              <a class="nav-link" href="#about">Audio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#projects">Startups</a>
+              <a class="nav-link" href="#projects">News</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#contact">Contact</a>
@@ -102,10 +102,21 @@
       <!-- Audio Player -->
       <div class="audio">
         <p class="subtitle-audio">Today's Korean Startup News Audio Book</p>
-        <div>
-          <div id="calamansi-player-1">Loading player...</div>
+          <div>
+            <div id="calamansi-player-1">Loading player...</div>
+          </div>
+      </div>
+      <div class="audio">
+        <p class="subtitle-audio">Today's Global Startup News Audio Book</p>
+          <div>
+            <div id="calamansi-player-1">Loading player...</div>
+          </div>
         </div>
       </div>
+    </section>
+    <!-- Projects-->
+    <section id="projects">
+      <!-- Audio Player -->
       <div class="album py-5 bg-light">
         <p class="subtitle-news">Today's Korean Startup News</p>
         <div class="container">
@@ -113,16 +124,6 @@
             id="news"
             class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
           ></div>
-        </div>
-      </div>
-    </section>
-    <!-- Projects-->
-    <section id="about">
-      <!-- Audio Player -->
-      <div class="audio">
-        <p class="subtitle-audio">Today's Global Startup News Audio Book</p>
-        <div>
-          <div id="calamansi-player-1">Loading player...</div>
         </div>
       </div>
       <div class="album py-5 bg-light">
@@ -345,22 +346,29 @@
         .then((jsonData) => {
           for (let i = 0; i < jsonData["news_global"].length; i++) {
             const item = jsonData["news_global"][i];
-            let description = item["description"];
-            let link = item["link"];
-            let imageUrl = item["imageUrl"];
+            let summary_translated = item["summary_translated"]
+              if (summary_translated.length > 120) {
+                summary_translated = summary_translated.substring(0, 120)
+              .concat("..");
+              } else {
+                space = " ";
+                summary_translated = summary_translated + space.repeat(120 - summary_translated.length);
+              }
+            let url = item["url"];
+            let urlToImage = item["urlToImage"];
 
             let card = `<div class="col">
                                     <div class="card shadow-sm">
-                                        <img src="${imageUrl}"
+                                        <img src="${urlToImage}"
                                             class="card-img-top" alt="...">
 
-                                        <div class="card-body">
-                                            <p class="card-text">${description}
+                                        <div class="card-body d-flex flex-column">
+                                            <p class="card-text">${summary_translated}
 
                                             </p>
-                                            <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex justify-content-between align-items-center mt-auto">
                                                 <div class="btn-group">
-                                                    <a href="${link}"
+                                                    <a href="${url}"
                                                         type="button" class="btn btn-sm btn-outline-secondary">View</a>
                                                 </div>
                                             </div>
