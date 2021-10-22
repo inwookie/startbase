@@ -383,6 +383,85 @@
       // },
       //     defaultAlbumCover: 'https://kr.object.ncloudstorage.com/startbase-news/asset/skins/default-album-cover.png',
       // });
+
+      // const url_startups_global = "/startups/global";
+      // // DB 에서 글로벌 유니콘 가지고 오기 
+      // fetch(url_startups_global, init)
+      //   .then((res) => {
+      //     if (res.status === 200) {
+      //       return res.json();
+      //     } else {
+      //       console.error(`HTTP error! status: ${res.status}`);
+      //     }
+      //   })
+      //   .then((jsonData) => {
+      //     for (let i = 0; i < jsonData["startups"].length; i++) {
+      //       const item = jsonData["startups"][i];
+
+      //       let title = item["title"];
+      //       let valuation = item["valuation"];
+      //       let city = item["city"];
+      //       let country = item["country"];
+      //       let date_joined = item["date joined"];
+      //       let industry = item["industry"];
+      //       let select_investors = item["select_investors"];
+
+      //       let table = <table class="table">
+      //         <thead>
+      //           <tr>
+      //             <th scope="col">#</th>
+      //             <th scope="col">First</th>
+      //             <th scope="col">Last</th>
+      //             <th scope="col">Handle</th>
+      //           </tr>
+      //         </thead>
+      //         <tbody>
+      //           <tr>
+      //             <th scope="row">1</th>
+      //             <td>Mark</td>
+      //             <td>Otto</td>
+      //             <td>@mdo</td>
+      //           </tr>
+      //           <tr>
+      //             <th scope="row">2</th>
+      //             <td>Jacob</td>
+      //             <td>Thornton</td>
+      //             <td>@fat</td>
+      //           </tr>
+      //           <tr>
+      //             <th scope="row">3</th>
+      //             <td colspan="2">Larry the Bird</td>
+      //             <td>@twitter</td>
+      //           </tr>
+      //         </tbody>
+      //       </table>
+
+      //       let card = `<div class="col">
+      //                               <div class="card shadow-sm">
+      //                                   <img src="${imageUrl}"
+      //                                       class="card-img-top" alt="...">
+
+      //                                   <div class="card-body">
+      //                                       <p class="card-text">${description}
+
+      //                                       </p>
+      //                                       <div class="d-flex justify-content-between align-items-center">
+      //                                           <div class="btn-group">
+      //                                               <a href="${link}"
+      //                                                   type="button" class="btn btn-sm btn-outline-secondary">View</a>
+      //                                           </div>
+      //                                       </div>
+      //                                   </div>
+      //                               </div>
+      //                           </div>`;
+
+      //       let comments = document.getElementById("news");
+      //       comments.insertAdjacentHTML("beforeend", card);
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
     </script>
   </body>
 </html>
