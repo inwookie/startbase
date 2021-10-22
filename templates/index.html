@@ -97,26 +97,24 @@
         </div>
       </div>
     </header>
-    <!-- News -->
+    <!-- Audio Player -->
     <section id="about">
-      <!-- Audio Player -->
       <div class="audio">
-        <p class="subtitle-audio">Today's Korean Startup News Audio Book</p>
+        <p class="subtitle-audio audio-top">Today's Korean Startup News Audio Book</p>
           <div>
             <div id="calamansi-player-1">Loading player...</div>
           </div>
       </div>
       <div class="audio">
         <p class="subtitle-audio">Today's Global Startup News Audio Book</p>
-          <div>
-            <div id="calamansi-player-1">Loading player...</div>
+          <div class="audio-bottom">
+            <div id="calamansi-player-2">Loading player...</div>
           </div>
         </div>
       </div>
     </section>
-    <!-- Projects-->
+    <!-- News -->
     <section id="projects">
-      <!-- Audio Player -->
       <div class="album py-5 bg-light">
         <p class="subtitle-news">Today's Korean Startup News</p>
         <div class="container">
@@ -398,6 +396,32 @@
           // console.log(jsonData);
 
           new Calamansi(document.querySelector("#calamansi-player-1"), {
+            skin: "https://kr.object.ncloudstorage.com/startbase-news/asset/skins",
+            playlists: {
+              News: jsonData["audio_list"],
+            },
+            defaultAlbumCover:
+              "https://kr.object.ncloudstorage.com/startbase-news/asset/skins/default-album-cover.png",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+        // 글로벌 오디오 파일 가져오기
+      const audio_url_global = "/api/audios_global";
+      fetch(audio_url_global, init)
+        .then((res) => {
+          if (res.status === 200) {
+            return res.json();
+          } else {
+            console.error(`HTTP error! status: ${res.status}`);
+          }
+        })
+        .then((jsonData) => {
+          // console.log(jsonData);
+
+          new Calamansi(document.querySelector("#calamansi-player-2"), {
             skin: "https://kr.object.ncloudstorage.com/startbase-news/asset/skins",
             playlists: {
               News: jsonData["audio_list"],
