@@ -3,11 +3,11 @@ from bs4 import BeautifulSoup
 from pymongo import MongoClient
 from requests.exceptions import SSLError
 
-my_ip = '____________'
-db_name = '_________'
-collection_name = '________'
-username = '________'
-password = '____________'
+my_ip = 'mongodb_my_ip'
+db_name = 'mongodb_db_name'
+collection_name = 'mongodb_collection_name'
+username = 'mongodb_username'
+password = 'mongodb_password'
 
 client = MongoClient(host=my_ip, port=27017,
                      username=username, password=password)
