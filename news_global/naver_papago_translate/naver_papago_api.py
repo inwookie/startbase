@@ -5,12 +5,12 @@ from pymongo import MongoClient
 from datetime import date, timedelta
 
 # =======DB 저장 TEST==========
-host = '___________'
-username = '___________'
-password = '___________'
+host = 'mongodb_host'
+username = 'mongodb_username'
+password = 'mongodb_password'
 
-db_name = '___________'
-collection_name = '___________'
+db_name = 'mongodb_db_name'
+collection_name = 'mongodb_collection_name'
 
 YESTERDAY = date.today() - timedelta(1)
 YESTERDAY = f"{str(YESTERDAY)}T00:00:00Z"
@@ -31,8 +31,8 @@ article_description = [dict['description']
 
 def papago_translate():
     total_trans_text = []
-    client_id = "___________"
-    client_secret = "___________"
+    client_id = "client_id"
+    client_secret = "client_secret"
     for description in article_description:
         encText = urllib.parse.quote(description)
         data = "source=en&target=ko&text=" + encText
