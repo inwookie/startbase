@@ -5,14 +5,14 @@ from pymongo import MongoClient
 from datetime import datetime, timedelta
 import pytz
 
-client_id = "____________"
-client_secret = "____________"
+client_id = "client_id"
+client_secret = "client_secert"
 
-my_ip = '____________'
-db_name = '____________'
-collection_name = '____________'
-username = '____________'
-password = '____________'
+my_ip = 'mongodb_my_ip'
+db_name = 'mongodb_db_name'
+collection_name = 'mongodb_collection_name'
+username = 'mongodb_username'
+password = 'mongodb_password'
 
 client = MongoClient(host=my_ip, port=27017,
                      username=username, password=password)
