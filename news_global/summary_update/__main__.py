@@ -7,13 +7,10 @@ import pytz
 
 
 def main(args):
-    """
-    CLOVA SUMMARY API 사용해서 뉴스 DB에 요약정보 업데이트하기
-    """
-
     # ========키워드 인자(argument,arg) 가져오기 ========
     db_info = args.get('DB')
     before_date = args.get('BEFORE_DATE')
+    summary_api_info = args.get('SUMMARY_API')
 
     # ========DB 접근설정 ========
     client = MongoClient(host=db_info['my_ip'], port=27017,
@@ -35,11 +32,10 @@ def main(args):
     # =====Summary=======
     for item in summary_items:
         if 200 < len(item['content']) < 2000:
-            result = item['description'].replace('</b>', "").replace('<b>', "")
+            result = item['description']
         else:
             # content -> summary field
-            result = item['content'].replace(
-                '</b>', "").replace('<b>', "")
+            result = item['content']
 
         # DB 에 업데이트
         collection.update_one(
