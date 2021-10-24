@@ -25,7 +25,7 @@ def main(args):
 def global_news():
     # ====================News API============================
     YESTERDAY = date.today() - timedelta(1)
-    API_KEY = "____________________"
+    API_KEY = "API_KEY"
     url = "https://newsapi.org/v2/everything"
 
     querystring = {
@@ -85,6 +85,17 @@ def save_to_db(my_ip, username, password, db_name, collection_name, docs):
 
     # 뉴스 link field 에 unique key 설정 - unique 하게 유일한 row 데이터만 입력됨.
     collection.create_index([('title', 1)], unique=True)
+
+    # summary_items = list(collection.find({}, {'_id': False}))
+    # for item in summary_items:
+    #     if 200 < len(item['content']) < 2000:
+    #         result = item['content']
+    #     else:
+    #         # description -> summary field
+    #         result = item['description']
+    #     # DB 에 업데이트
+    #     collection.update_one(
+    #         {'link': item['link']}, {'$set': {'summary': result}})
 
     try:
         collection.insert_many(docs, ordered=False)
