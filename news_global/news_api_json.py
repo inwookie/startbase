@@ -5,16 +5,16 @@ from pymongo import MongoClient
 from pymongo.errors import BulkWriteError
 
 # =======DB 저장 TEST==========
-host = '___________'
-username = '___________'
-password = '___________'
+host = 'mongodb_host'
+username = 'mongodb_username'
+password = 'mongodb_password'
 
-db_name = '___________'
-collection_name = '___________'
+db_name = 'mongodb_db_name'
+collection_name = 'mongodb_collection_name'
 
 
 YESTERDAY = date.today() - timedelta(1)
-API_KEY = "___________"
+API_KEY = "API_KEY"
 url = "https://newsapi.org/v2/everything"
 
 querystring = {
@@ -76,7 +76,7 @@ def save_to_db(my_ip, username, password, db_name, collection_name, docs):
     db = client[db_name]
     collection = db[collection_name]  # unique key 설정할 collection
 
-    # 뉴스 link field 에 unique key 설정 - unique 하게 유일한 row 데이터만 입력됨.
+    # 뉴스 title field 에 unique key 설정 - unique 하게 유일한 row 데이터만 입력됨.
     collection.create_index([('title', 1)], unique=True)
 
     try:
