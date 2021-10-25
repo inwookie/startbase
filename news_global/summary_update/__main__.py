@@ -29,6 +29,8 @@ def main(args):
         {'summary': {'$exists': False}, 'date': {'$gte': target_date['date_st'], '$lte': target_date['date_end']}}, {'_id': False}))
     # print(summary_items)
 
+    image_url = 'https://image.freepik.com/free-vector/startup-construction-development-3d-thin-line-art-style-design-concept-isometric-illustration_1284-61110.jpg'
+
     # =====Summary=======
     for item in summary_items:
         if 200 < len(item['content']) < 2000:
