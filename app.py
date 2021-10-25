@@ -56,7 +56,7 @@ def get_audios_global():
 
     result = {}
     # ======before_date일 전 날짜 형태로 폴더명 만들기=======
-    target_date = cal_datetime_kst(before_date)
+    target_date = cal_datetime_kst(2)
     # 연-월-일 문자열 형태로 반환
     target_date_str = target_date['date_st'].strftime("%Y-%m-%d")
     folder = f'{target_date_str}_global.mp3'
@@ -102,7 +102,7 @@ def send_news_global():
     collection = db[db_info['collection_name_global']]
 
     # ======before_date 일 전 데이터 조회하기=======
-    target_date = cal_datetime_utc(before_date)
+    target_date = cal_datetime_utc(2)
     # print(f'UTC targetdate: {target_date}')
 
     news_items_global = list(collection.find(
