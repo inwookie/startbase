@@ -32,8 +32,6 @@ def main(args):
         collection.update_one(
             {'url': item['url']}, {'$set': {'summary_translated': result}})
 
-    return {'process': 'end'}
-
 
 def translate(txt, client_id, client_secret):
     encText = urllib.parse.quote(txt)

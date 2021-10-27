@@ -1,3 +1,4 @@
+*.DS_Store
 important_keys.py
 venv
 news_korea/naver_news_save_db_NaverCloudFunction/virtualenv
