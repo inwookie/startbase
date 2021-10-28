@@ -302,17 +302,15 @@ def cal_datetime_utc(before_date, timezone='Asia/Seoul'):
 
 ### Mongo DB
 
-<div>
-<img width="500" alt="온보딩2" src="https://github.com/inwookie/startbase/blob/main/preview/mongodb1.png?raw=true">
-</div>
-
 ![](https://github.com/inwookie/startbase/blob/main/preview/mongodb1.png?raw=true)
 ![](https://github.com/inwookie/startbase/blob/main/preview/mongodb2.png?raw=true)
 
 ### Object Storage
 
-![](https://github.com/inwookie/startbase/blob/main/preview/home.png?raw=true)
-![](https://github.com/inwookie/startbase/blob/main/preview/home.png?raw=true)
+<div>
+<img width="164" alt="온보딩2" src="https://github.com/inwookie/startbase/blob/main/preview/object_storage1.png?raw=true">
+<img width="500" alt="온보딩2" src="https://github.com/inwookie/startbase/blob/main/preview/object_storage2.png?raw=true">
+</div>
 
 <!-- ROADMAP -->
 
