@@ -308,7 +308,7 @@ def cal_datetime_utc(before_date, timezone='Asia/Seoul'):
 ### Object Storage
 
 <div>
-<img width="200" alt="온보딩2" src="https://github.com/inwookie/startbase/blob/main/preview/object_storage1.png?raw=true">
+<img width="197" alt="온보딩2" src="https://github.com/inwookie/startbase/blob/main/preview/object_storage1.png?raw=true">
 <img width="600" alt="온보딩2" src="https://github.com/inwookie/startbase/blob/main/preview/object_storage2.png?raw=true">
 </div>
 
