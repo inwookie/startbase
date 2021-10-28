@@ -2,7 +2,7 @@
 
 <div id="top"></div>
 
-![](https://github.com/inwookie/startbase/blob/main/preview/home.png?raw=true)
+![](https://github.com/inwookie/startbase/blob/main/preview/img/home.png?raw=true)
 
 [Project Link](http://startbase.ml/)
 
@@ -61,7 +61,7 @@ StartBase is for those who would love to read more news about startups, or even 
 
 ### The Architecture
 
-![](https://github.com/inwookie/startbase/blob/main/preview/architecture.png?raw=true)
+![](https://github.com/inwookie/startbase/blob/main/preview/img/architecture.png?raw=true)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -307,14 +307,14 @@ def cal_datetime_utc(before_date, timezone='Asia/Seoul'):
 
 ### Mongo DB
 
-![](https://github.com/inwookie/startbase/blob/main/preview/mongodb1.png?raw=true)
-![](https://github.com/inwookie/startbase/blob/main/preview/mongodb2.png?raw=true)
+![](https://github.com/inwookie/startbase/blob/main/preview/img/mongodb1.png?raw=true)
+![](https://github.com/inwookie/startbase/blob/main/preview/img/mongodb2.png?raw=true)
 
 ### Object Storage
 
 <div>
-<img width="197" alt="온보딩2" src="https://github.com/inwookie/startbase/blob/main/preview/object_storage1.png?raw=true">
-<img width="600" alt="온보딩2" src="https://github.com/inwookie/startbase/blob/main/preview/object_storage2.png?raw=true">
+<img width="197" alt="온보딩2" src="https://github.com/inwookie/startbase/blob/main/preview/img/object_storage1.png?raw=true">
+<img width="600" alt="온보딩2" src="https://github.com/inwookie/startbase/blob/main/preview/img/object_storage2.png?raw=true">
 </div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -367,20 +367,13 @@ def cal_datetime_utc(before_date, timezone='Asia/Seoul'):
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- CONTRIBUTING -->
+<!-- Demo -->
 
-## Contributing
+## Demo
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+### Home
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+![](https://github.com/inwookie/startbase/blob/main/preview/gif/home.gif?raw=true)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
