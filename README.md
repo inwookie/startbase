@@ -48,6 +48,8 @@ StartBase is for those who would love to read more news about startups, or even 
 
 - Get daily curated global news about startups and llisten to a translated and summarized version of that curated news.
 
+> Project Duration : 2021.10.04 ~ 2021.10.28
+
 ### Built With
 
 - [Naver Cloud](https://www.ncloud.com/product/compute/server)
