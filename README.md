@@ -4,29 +4,34 @@
 
 ![](https://github.com/inwookie/startbase/blob/main/preview/home.png?raw=true)
 
+[Project Link](http://startbase.ml/)
+
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
+  <summary>**Table of Contents**</summary>
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#the-architecture">The Architecture</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#implemented-features">Implemented Features</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#get-news">Get News</a></li>
+        <li><a href="#summarize">Summarize</a></li>
+        <li><a href="#summarize">Summarize</a></li>
+        <li><a href="#translate">Translate</a></li>
+        <li><a href="#voice">Voice</a></li>
+        <li><a href="#convert-to-utc">Convert to UTC</a></li>
+        <li><a href="#mongo-db">Mongo DB</a></li>
+        <li><a href="#object-storage">Object Storage</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -318,7 +323,7 @@ def cal_datetime_utc(before_date, timezone='Asia/Seoul'):
 
 ## Roadmap
 
-Backend
+**Backend**
 
 - [x] Create Server - Naver Cloud
 - [x] Get Korean News - Naver News API
@@ -342,7 +347,7 @@ Backend
   - [x] Save to Object Storage
   - [x] Implement it to Naver Cloud Function
 
-Frontend
+**Frontend**
 
 - [x] Create Flask Web App
   - [x] Get news data from DB
@@ -350,7 +355,7 @@ Frontend
   - [x] Implement Bootstrap v5.0
   - [x] Design web page using HTML/CSS/Javascript
 
-Release
+**Release**
 
 - [x] Get/Buy Domain
 - [x] Configure NCP Object Storage
@@ -385,10 +390,10 @@ Don't forget to give the project a star! Thanks again!
 
 ### Inwook Baek
 
-Email [Link](inwook.baek@gmail.com)
+**Email:** inwook.baek@gmail.com
 
-Notion [Link](https://www.notion.so/inwook/Inwook-Baek-4778a344f4b84a42b2c6ef799d62f54b)
+**Notion** [Link](https://www.notion.so/inwook/Inwook-Baek-4778a344f4b84a42b2c6ef799d62f54b)
 
-LinkedIn [Link](https://www.linkedin.com/in/inwook-baek/)
+**LinkedIn** [Link](https://www.linkedin.com/in/inwook-baek/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
