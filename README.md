@@ -375,6 +375,22 @@ def cal_datetime_utc(before_date, timezone='Asia/Seoul'):
 
 ![](https://github.com/inwookie/startbase/blob/main/preview/gif/home.gif?raw=true)
 
+### Audio
+
+![](https://github.com/inwookie/startbase/blob/main/preview/gif/audio.gif?raw=true)
+
+### News - Korea
+
+![](https://github.com/inwookie/startbase/blob/main/preview/gif/news_korea.gif?raw=true)
+
+### News - Global
+
+![](https://github.com/inwookie/startbase/blob/main/preview/gif/news_global.gif?raw=true)
+
+### Navigation
+
+![](https://github.com/inwookie/startbase/blob/main/preview/gif/nav.gif?raw=true)
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTACT -->
