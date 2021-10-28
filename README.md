@@ -44,8 +44,6 @@ StartBase is for those who would love to read more news about startups, or even 
 
 - Get daily curated global news about startups and llisten to a translated and summarized version of that curated news.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 ### Built With
 
 - [Naver Cloud](https://www.ncloud.com/product/compute/server)
@@ -55,8 +53,6 @@ StartBase is for those who would love to read more news about startups, or even 
 - [MongoDB](https://www.mongodb.com/)
 - [Bootstrap](https://getbootstrap.com)
 - [Flask](https://flask.palletsprojects.com/en/2.0.x/)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 ### The Architecture
 
@@ -131,11 +127,9 @@ Naver News API and News API were used to get the daily news about startups. Duri
 
 _For the full code, please refer to the  [Naver News API](https://github.com/inwookie/startbase/blob/main/news_korea/naver_news_save_db_NaverCloudFunction/__main__.py) & [News API](https://github.com/inwookie/startbase/blob/main/news_global/global_news_save_db_NaverCloudFunction/__main__.py)_
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 ### Summarize
 
-Naver News API and News API were used to get the daily news about startups. During the process, if the given data does not include an url image or contents, those information will be scraped from the relevant website. Once the process has been completed, it will be saved in the MongoDB collection. This process would be repeated multiple times during the day by Naver Cloud Function.
+Accumulated news needs to be summarized because the Voice API limits its maximum characters to 1000 per call. Summary API would use the content of the news and return it in two sentences. Using the option of the API, the tone of the summarized text would not be changed from the original.
 
 ```python
 # Accessing Naver Summary API
@@ -159,7 +153,84 @@ Naver News API and News API were used to get the daily news about startups. Duri
 
 _For the full code, please refer to the  [Naver Summary API](https://github.com/inwookie/startbase/blob/main/news_korea/naver_news_summary_update_NaverCloudFunction/__main__.py)_
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+### Translate
+
+Accumulated English news needs to be translated in order to be used for the Voice API, as Naver Voice API only supports Korean and Japanese text as of right now.
+
+```python
+# Accessing Naver Papago API
+    encText = urllib.parse.quote(txt)
+    data = "source=en&target=ko&text=" + encText
+    url = "https://naveropenapi.apigw.ntruss.com/nmt/v1/translation"
+    request = urllib.request.Request(url)
+    request.add_header("X-NCP-APIGW-API-KEY-ID", client_id)
+    request.add_header("X-NCP-APIGW-API-KEY", client_secret)
+    response = urllib.request.urlopen(request, data=data.encode("utf-8"))
+    rescode = response.getcode()
+    if(rescode == 200):
+        response_body = response.read()
+        data = response_body.decode('utf-8')
+        data_full = json.loads(data)
+        trans_text = data_full['message']['result']['translatedText']
+        print(trans_text)
+        # print(response_body.decode('utf-8'))
+    else:
+        print("Error Code:" + rescode)
+```
+
+_For the full code, please refer to the  [Naver Papago API](https://github.com/inwookie/startbase/blob/main/news_global/naver_papago_translate/naver_papago_summary_translate/__main__.py)_
+
+### Voice
+
+Accumulated news needs to be summarized because the Voice API limits its maximum characters to 1000 per call. Summary API would use the content of the news and return it in two sentences. Using the option of the API, the tone of the summarized text would not be changed from the original.
+
+```python
+# Accessing Naver Summary API
+    headers = {'X-NCP-APIGW-API-KEY-ID': client_id,
+               'X-NCP-APIGW-API-KEY': client_secret,
+               'Content-Type': 'application/json'}
+
+    document = {'content': txt}
+    option = {'language': 'ko', 'model': 'news', 'tone': 0, 'summaryCount': 2}
+
+    data = {'document': document, 'option': option}
+
+    r = requests.post('https://naveropenapi.apigw.ntruss.com/text-summary/v1/summarize',
+                      headers=headers, data=json.dumps(data))
+
+    summary_txt = ''
+    if r.status_code == requests.codes.ok:
+        result_response = json.loads(r.content)
+        summary_txt = result_response['summary']
+```
+
+_For the full code, please refer to the  [Naver Voice API](https://github.com/inwookie/startbase/blob/main/voice_api/voice_korea_source/__main__.py)_
+
+### Get Date
+
+Accumulated news needs to be summarized because the Voice API limits its maximum characters to 1000 per call. Summary API would use the content of the news and return it in two sentences. Using the option of the API, the tone of the summarized text would not be changed from the original.
+
+```python
+# Accessing Naver Summary API
+    headers = {'X-NCP-APIGW-API-KEY-ID': client_id,
+               'X-NCP-APIGW-API-KEY': client_secret,
+               'Content-Type': 'application/json'}
+
+    document = {'content': txt}
+    option = {'language': 'ko', 'model': 'news', 'tone': 0, 'summaryCount': 2}
+
+    data = {'document': document, 'option': option}
+
+    r = requests.post('https://naveropenapi.apigw.ntruss.com/text-summary/v1/summarize',
+                      headers=headers, data=json.dumps(data))
+
+    summary_txt = ''
+    if r.status_code == requests.codes.ok:
+        result_response = json.loads(r.content)
+        summary_txt = result_response['summary']
+```
+
+_For the full code, please refer to the  [Naver Summary API](https://github.com/inwookie/startbase/blob/main/news_korea/naver_news_summary_update_NaverCloudFunction/__main__.py)_
 
 <!-- ROADMAP -->
 
