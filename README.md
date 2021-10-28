@@ -28,16 +28,15 @@
         <li><a href="#convert-to-utc">Convert to UTC</a></li>
         <li><a href="#mongo-db">Mongo DB</a></li>
         <li><a href="#object-storage">Object Storage</a></li>
+        <li><a href="#card-news">Card News</a></li>
+        <li><a href="#calamansi-audio-player">Calamansi Audio Player</a></li>
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#demo">Demo</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
-
-https://kr.object.ncloudstorage.com/startbase-news/2021-10-26_korean.mp3/2021-10-26_21.mp3
-
-https://kr.object.ncloudstorage.com/startbase-news/2021-10-26_global.mp3/2021-10-26_6.mp3
 
 <!-- ABOUT THE PROJECT -->
 
@@ -317,6 +316,84 @@ def cal_datetime_utc(before_date, timezone='Asia/Seoul'):
 <img width="600" alt="온보딩2" src="https://github.com/inwookie/startbase/blob/main/preview/img/object_storage2.png?raw=true">
 </div>
 
+### Card News
+
+Implement card news on a webpage using javascript.
+
+```javascript
+const url = "/api/news";
+// Get news data from API
+fetch(url, init)
+  .then((res) => {
+    if (res.status === 200) {
+      return res.json();
+    } else {
+      console.error(`HTTP error! status: ${res.status}`);
+    }
+  })
+  .then((jsonData) => {
+    for (let i = 0; i < jsonData["news"].length; i++) {
+      const item = jsonData["news"][i];
+      let description = item["description"];
+      let link = item["link"];
+      let imageUrl = item["imageUrl"];
+
+      let card = `<div class="col">
+                                    <div class="card shadow-sm">
+                                        <img src="${imageUrl}"
+                                            class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <p class="card-text">${description}
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <a href="${link}"
+                                                        type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+
+      let comments = document.getElementById("news");
+      comments.insertAdjacentHTML("beforeend", card);
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+```
+
+### Calamansi Audio Player
+
+Gain audio file from Object Storage and display it through [Calamansi Audio Player](https://github.com/voerro/calamansi-js).
+
+```javascript
+// Get audio file from Object Storage
+const audio_url = "/api/audios";
+fetch(audio_url, init)
+  .then((res) => {
+    if (res.status === 200) {
+      return res.json();
+    } else {
+      console.error(`HTTP error! status: ${res.status}`);
+    }
+  })
+  .then((jsonData) => {
+    new Calamansi(document.querySelector("#calamansi-player-1"), {
+      skin: "https://kr.object.ncloudstorage.com/startbase-news/asset/skins",
+      playlists: {
+        News: jsonData["audio_list"],
+      },
+      defaultAlbumCover:
+        "https://kr.object.ncloudstorage.com/startbase-news/asset/skins/default-album-cover.png",
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+```
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ROADMAP -->
@@ -371,6 +448,12 @@ def cal_datetime_utc(before_date, timezone='Asia/Seoul'):
 
 ## Demo
 
+### Audio File
+
+Example Audio File 1 [Listen](https://kr.object.ncloudstorage.com/startbase-news/2021-10-26_korean.mp3/2021-10-26_21.mp3)
+
+Example Audio File 2 [Listen](https://kr.object.ncloudstorage.com/startbase-news/2021-10-26_global.mp3/2021-10-26_6.mp3)
+
 ### Home
 
 ![](https://github.com/inwookie/startbase/blob/main/preview/gif/home.gif?raw=true)
@@ -378,16 +461,25 @@ def cal_datetime_utc(before_date, timezone='Asia/Seoul'):
 ### Audio
 
 ![](https://github.com/inwookie/startbase/blob/main/preview/img/audio.png?raw=true)
+
+</br>
+
 ![](https://github.com/inwookie/startbase/blob/main/preview/gif/audio.gif?raw=true)
 
 ### News - Korea
 
 ![](https://github.com/inwookie/startbase/blob/main/preview/img/news_korea.png?raw=true)
+
+</br>
+
 ![](https://github.com/inwookie/startbase/blob/main/preview/gif/news_korea.gif?raw=true)
 
 ### News - Global
 
 ![](https://github.com/inwookie/startbase/blob/main/preview/img/news_global.png?raw=true)
+
+</br>
+
 ![](https://github.com/inwookie/startbase/blob/main/preview/gif/news_global.gif?raw=true)
 
 ### Contact
