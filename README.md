@@ -258,26 +258,6 @@ The summarized and translated contents of the news will be converted to an audio
     local_path = str(Path.cwd().joinpath(*dir_parts))
     print(f'upload_storage : {local_path}')
 
-    # object storage 에 업로드할 파일 정보
-    upload_path = f'{bucket_info["upload_folder"]}/{bucket_info["upload_file"]}'
-
-    s3.upload_file(local_path, bucket_info['bucket_name'], upload_path,
-                   ExtraArgs={'ACL': 'public-read'})
-```
-
-```python
-    # Upload to Object Storage
-    service_name = 's3'
-    endpoint_url = 'https://kr.object.ncloudstorage.com'
-    region_name = 'kr-standard'
-
-    s3 = boto3.client(service_name, endpoint_url=endpoint_url, aws_access_key_id=storage_info['access_key'],
-                      aws_secret_access_key=storage_info['secret_key'])
-
-    dir_parts = [local_info['local_file']]
-    local_path = str(Path.cwd().joinpath(*dir_parts))
-    print(f'upload_storage : {local_path}')
-
     upload_path = f'{bucket_info["upload_folder"]}/{bucket_info["upload_file"]}'
 
     s3.upload_file(local_path, bucket_info['bucket_name'], upload_path,
@@ -319,6 +299,20 @@ def cal_datetime_utc(before_date, timezone='Asia/Seoul'):
 
     return {'date_st': start, 'date_end': end}
 ```
+
+### Mongo DB
+
+<div>
+<img width="500" alt="온보딩2" src="https://github.com/inwookie/startbase/blob/main/preview/mongodb1.png?raw=true">
+</div>
+
+![](https://github.com/inwookie/startbase/blob/main/preview/mongodb1.png?raw=true)
+![](https://github.com/inwookie/startbase/blob/main/preview/mongodb2.png?raw=true)
+
+### Object Storage
+
+![](https://github.com/inwookie/startbase/blob/main/preview/home.png?raw=true)
+![](https://github.com/inwookie/startbase/blob/main/preview/home.png?raw=true)
 
 <!-- ROADMAP -->
 
