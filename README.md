@@ -155,7 +155,7 @@ _For the full code, please refer to the  [Naver Summary API](https://github.com
 
 ### Translate
 
-Accumulated English news needs to be translated in order to be used for the Voice API, as Naver Voice API only supports Korean and Japanese text as of right now.
+Accumulated English news needs to be translated in order to be used for the Voice API as Naver Voice API only supports Korean and Japanese text as of right now.
 
 ```python
 # Accessing Naver Papago API
@@ -182,7 +182,7 @@ _For the full code, please refer to the  [Naver Papago API](https://github.com/
 
 ### Voice
 
-Accumulated news needs to be summarized because the Voice API limits its maximum characters to 1000 per call. Summary API would use the content of the news and return it in two sentences. Using the option of the API, the tone of the summarized text would not be changed from the original.
+The summarized and translated contents of the news will be converted to an audio file using the Naver Voice API. Because the character limit is 1000 characters, four summary data would be combined and converted to an audio file and be saved to object storage. To save space, audio files would be deleted once they have been stored in object storage.
 
 ```python
 # Accessing Naver Summary API
@@ -202,35 +202,123 @@ Accumulated news needs to be summarized because the Voice API limits its maximum
     if r.status_code == requests.codes.ok:
         result_response = json.loads(r.content)
         summary_txt = result_response['summary']
+```
+
+```python
+    date_cnt_items = collection.count_documents({
+        'date': {'$gte': target_date['date_st'], '$lte': target_date['date_end']}})
+
+    # Combine four summary data per api call
+    page_num = (date_cnt_items // 4) + (0 if date_cnt_items % 4 == 0 else 1)
+
+    for i in range(page_num):
+        file_name = f'{kst_target_date}_{i+1}.mp3'
+
+        skip_num = i * 4
+
+        limit_items = list(collection.find(
+            {'date': {'$gte': target_date['date_st'], '$lte': target_date['date_end']}}, {'_id': False}).sort('date', 1).skip(skip_num).limit(4))
+
+        summary_contents = ''
+
+        for item in limit_items:
+            summary_contents = (f'다음 뉴스.  '.join(
+                item['summary'] for item in limit_items))[: 999]
+
+        # =========Voice Convert=========
+        print(f'======{len(summary_contents)}======')
+
+        result = tts(client_id=voice_storage_info['client_id'], client_secret=voice_storage_info['client_secret'],
+                     text=summary_contents, file_folder=file_folder, file_name=file_name)
+
+        # =========Upload to Object Storage =========
+        local_info['local_file'] = file_name
+        bucket_info['upload_file'] = file_name
+        bucket_info['upload_folder'] = f'{kst_target_date}_korean.mp3'
+
+        if result['status'] == 'ok':
+            upload_storage(storage_info=storage_info, local_info=local_info,
+                           bucket_info=bucket_info)
+            # Delete the file once it has been saved to Object Storage
+            result_msg = remove_file(
+                local_info['local_folder'], local_info['local_file'])
+            print(result_msg)
+```
+
+```python
+    # Upload to Object Storage
+    service_name = 's3'
+    endpoint_url = 'https://kr.object.ncloudstorage.com'
+    region_name = 'kr-standard'
+
+    s3 = boto3.client(service_name, endpoint_url=endpoint_url, aws_access_key_id=storage_info['access_key'],
+                      aws_secret_access_key=storage_info['secret_key'])
+
+    dir_parts = [local_info['local_file']]
+    local_path = str(Path.cwd().joinpath(*dir_parts))
+    print(f'upload_storage : {local_path}')
+
+    # object storage 에 업로드할 파일 정보
+    upload_path = f'{bucket_info["upload_folder"]}/{bucket_info["upload_file"]}'
+
+    s3.upload_file(local_path, bucket_info['bucket_name'], upload_path,
+                   ExtraArgs={'ACL': 'public-read'})
+```
+
+```python
+    # Upload to Object Storage
+    service_name = 's3'
+    endpoint_url = 'https://kr.object.ncloudstorage.com'
+    region_name = 'kr-standard'
+
+    s3 = boto3.client(service_name, endpoint_url=endpoint_url, aws_access_key_id=storage_info['access_key'],
+                      aws_secret_access_key=storage_info['secret_key'])
+
+    dir_parts = [local_info['local_file']]
+    local_path = str(Path.cwd().joinpath(*dir_parts))
+    print(f'upload_storage : {local_path}')
+
+    upload_path = f'{bucket_info["upload_folder"]}/{bucket_info["upload_file"]}'
+
+    s3.upload_file(local_path, bucket_info['bucket_name'], upload_path,
+                   ExtraArgs={'ACL': 'public-read'})
+```
+
+```python
+    # Delete a file after upload has been completed
+    dir_parts = [file_folder, file_name]
+    path = Path.cwd().joinpath(*dir_parts)
+
+    try:
+        if os.path.isfile(path):
+            os.remove(path)
+            result = f'{path} 파일이 삭제되었습니다.'
+        else:
+            result = f'Error: {path} 를 찾을 수 없습니다.'
+    except OSError as e:
+        result = f'Error: {e.filename} - {e.strerror}.'
 ```
 
 _For the full code, please refer to the  [Naver Voice API](https://github.com/inwookie/startbase/blob/main/voice_api/voice_korea_source/__main__.py)_
 
-### Get Date
+### Convert to UTC
 
-Accumulated news needs to be summarized because the Voice API limits its maximum characters to 1000 per call. Summary API would use the content of the news and return it in two sentences. Using the option of the API, the tone of the summarized text would not be changed from the original.
+Because MongoDB is wired in UTC, date and time needs to be converted to UTC from current timezone of Asia/Seoul.
 
 ```python
-# Accessing Naver Summary API
-    headers = {'X-NCP-APIGW-API-KEY-ID': client_id,
-               'X-NCP-APIGW-API-KEY': client_secret,
-               'Content-Type': 'application/json'}
+def cal_datetime_utc(before_date, timezone='Asia/Seoul'):
 
-    document = {'content': txt}
-    option = {'language': 'ko', 'model': 'news', 'tone': 0, 'summaryCount': 2}
+    today = pytz.timezone(timezone).localize(datetime.now())
+    target_date = today - timedelta(days=before_date)
 
-    data = {'document': document, 'option': option}
+    start = target_date.replace(hour=0, minute=0, second=0,
+                                microsecond=0).astimezone(pytz.UTC)
 
-    r = requests.post('https://naveropenapi.apigw.ntruss.com/text-summary/v1/summarize',
-                      headers=headers, data=json.dumps(data))
+    end = target_date.replace(
+        hour=23, minute=59, second=59, microsecond=999999).astimezone(pytz.UTC)
 
-    summary_txt = ''
-    if r.status_code == requests.codes.ok:
-        result_response = json.loads(r.content)
-        summary_txt = result_response['summary']
+    return {'date_st': start, 'date_end': end}
 ```
-
-_For the full code, please refer to the  [Naver Summary API](https://github.com/inwookie/startbase/blob/main/news_korea/naver_news_summary_update_NaverCloudFunction/__main__.py)_
 
 <!-- ROADMAP -->
 
