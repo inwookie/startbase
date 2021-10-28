@@ -385,8 +385,10 @@ Don't forget to give the project a star! Thanks again!
 
 ### Inwook Baek
 
-Portfolio [Notion](https://www.notion.so/inwook/Inwook-Baek-4778a344f4b84a42b2c6ef799d62f54b)
+Email [Link](inwook.baek@gmail.com)
 
-Link [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Notion [Link](https://www.notion.so/inwook/Inwook-Baek-4778a344f4b84a42b2c6ef799d62f54b)
+
+LinkedIn [Link](https://www.linkedin.com/in/inwook-baek/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
