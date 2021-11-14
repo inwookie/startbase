@@ -51,7 +51,7 @@ def get_audios():
 @app.route("/api/audios_global")
 def get_audios_global():
     """
-    audio 파일 보내기
+    global audio 파일 보내기
     """
 
     result = {}
