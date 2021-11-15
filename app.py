@@ -84,7 +84,6 @@ def send_news():
 
     news_items = list(collection.find(
         {'date': {'$gte': target_date['date_st'], '$lte': target_date['date_end']}}, {'_id': False}).sort('date', 1).limit(12))
-    # print(news_items)
 
     return jsonify({"news": news_items})
 
