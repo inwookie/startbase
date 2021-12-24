@@ -4,8 +4,6 @@
 
 ![](https://github.com/inwookie/startbase/blob/main/preview/img/home.png?raw=true)
 
-[Project Link](http://startbase.ml/)
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
